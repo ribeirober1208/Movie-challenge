@@ -1,0 +1,36 @@
+.movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.movie-item {
+    width: 250px;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+#movie-title {
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-family: helvetica;
+}
+
+#movie-poster {
+    transition: transform 0.3s ease;
+    margin: 0px;
+    padding: 5px;
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+#movie-poster:hover {
+    transform: scale(1.1);
+}
