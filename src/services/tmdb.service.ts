@@ -10,6 +10,7 @@ export class TmdbService {
   private readonly _KEY = '5d900fd5a214dd86a0e9204cc6d49fa9';
   private readonly _BASE_URL = 'https://api.themoviedb.org/3';
   private readonly _ENDPOINT = '/movie/popular';
+  private readonly _DETAILS_ENDPOINT = '/movie';
 
   constructor(private readonly _HTTP: HttpClient) {}
 
@@ -20,5 +21,13 @@ export class TmdbService {
       tap((data) => console.log(data)),
     );
   }
+  getMovieDetails(movieId: number): Observable<any> {
+    const url = `${this._BASE_URL}${this._DETAILS_ENDPOINT}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
+
+    return this._HTTP.get(url).pipe(
+      tap((data) => console.log(data)),
+    );
+  }
+
 }
 
