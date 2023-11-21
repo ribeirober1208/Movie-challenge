@@ -9,12 +9,12 @@ body, html {
     bottom: 0;
     width: 100%;
     padding: 10px;
+    left: 0;
   }
   
   .footer-link {
     display: inline-block;
     text-decoration: none;
-    color: #333; /* Cor do texto */
   }
   
   .github-icon {

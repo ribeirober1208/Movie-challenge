@@ -1,36 +1,36 @@
+
 .movies-container {
     display: flex;
     flex-wrap: wrap;
-    position: relative;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
+    justify-content: space-between; 
+    margin: 50px;
 }
+
 
 .movie-item {
-    width: 250px;
-    text-align: center;
-    margin-bottom: 20px;
-
-}
-
-#movie-title {
-    max-width: 60%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 16px;
-    font-style: normal;
-    font-family: helvetica;
+    width: 18%; 
+    margin-bottom: 20px; 
+    box-sizing: border-box; 
 }
 
 #movie-poster {
-    transition: transform 0.3s ease;
-    margin: 0px;
-    padding: 5px;
-    border-radius: 10px;
-    max-width: 100%;
+    width: 100%; 
+    height: auto;
+    border-radius: 5px;
+}    
+
+
+#movie-title {
+    margin-top: 10px; 
 }
 
-#movie-poster:hover {
-    transform: scale(1.1);
+
+.movie-info a {
+    text-decoration: none; 
+    color: #ff9900; 
+}
+
+
+.movie-item p {
+    margin-top: 5px; 
 }

@@ -21,7 +21,7 @@ export class TmdbService {
       tap((data) => console.log(data)),
     );
   }
-  getMovieDetails(movieId: number): Observable<any> {
+  getMovieDetails(movieId: string = ''): Observable<any> {
     const url = `${this._BASE_URL}${this._DETAILS_ENDPOINT}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
 
     return this._HTTP.get(url).pipe(
