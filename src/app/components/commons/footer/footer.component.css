@@ -1,0 +1,26 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .main-footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .footer-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #333; /* Cor do texto */
+  }
+  
+  .github-icon {
+    width: 30px; 
+    height: auto; 
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  
