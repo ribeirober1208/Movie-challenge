@@ -5,13 +5,15 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     MovieDetailsComponent,
-    PaginationComponent
+    PaginationComponent,
+    MovieListComponent
   ],
   imports: [
     CommonModule,

@@ -7,7 +7,9 @@ import { TmdbService } from 'src/services/tmdb.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
+  
   movies: any[] = [];
   navigationService: any;
 

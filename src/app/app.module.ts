@@ -9,6 +9,7 @@ import { MainComponent } from './components/commons/main/main.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule} from '@angular/common/http';
 import { TmdbService } from 'src/services/tmdb.service';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { TmdbService } from 'src/services/tmdb.service';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    MovieListComponent
     
   ],
   imports: [

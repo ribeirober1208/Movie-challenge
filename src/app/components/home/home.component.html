@@ -1,23 +1,9 @@
 <main class="movies-container">
     <div *ngFor="let movie of movies" class="movie-item" (click)="navigateToMovieDetail(movie.id)">
-        <img id="movie-poster" [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path" alt="{{ movie.title }} Poster">
+        <img id="movie-poster" [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path"alt="{{ movie.title }} Poster">
         <h4 id="movie-title">{{ movie.title }}</h4>
+        <p>Ano: {{ movie.release_date | date: 'yyyy' }}</p>
         <p class="movie-info"><a routerLink="/details/{{ movie.id }}">Sinopse</a></p>
-        <p>Lançamento: {{ movie.release_date | date: 'yyyy' }}</p>
+        
     </div>
 </main>
-
-<!--Este arquivo é o principal e espelha no centro da home
-<main>
-    <div class="movies-container" #movieContainer>
-        <ul class="movie-lines-container">
-            <li *ngFor="let movie of movies" class="movie">
-                <img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" class="poster-movie">
-                <p class="movie-info"><a routerLink="/details/{{ movie.id }}">{{ movie.original_title | uppercase }}</a></p>
-                <p>Year: {{ movie.release_date.slice(0, 4) }}</p>
-            </li>
-        </ul>
-
-    </div>
-</main>
--->

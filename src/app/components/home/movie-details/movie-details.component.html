@@ -1,11 +1,16 @@
 <a routerLink="/">
   <img class="Back-to-home" src="assets/Back Arrow.png" alt="Back-to-home">
 </a>
-<div *ngIf="movieDetails">
-  <h2>{{ movieDetails.title }}</h2>
-  <img class="imgDetails" src="https://image.tmdb.org/t/p/w200/{{ movieDetails.poster_path }}"
-    alt="movieDetails-poster">
-  <p>Lançamento: {{ movieDetails.release_date | date: 'yyyy' }}</p>
-  <p>Sinopse: {{ movieDetails.overview }}</p>
-  <p>Nota: {{ movieDetails.vote_average }}</p>
-</div>
+
+<main class="details-container">
+  <div class="imgDetails">
+    <img src="https://image.tmdb.org/t/p/w200/{{ movieDetails.poster_path }}" alt="movieDetails-poster">
+  </div>
+
+  <div *ngIf="movieDetails" class="details-text">
+    <h2>{{ movieDetails.title }}</h2>
+    <p>Lançamento: {{ movieDetails.release_date | date: 'yyyy' }}</p>
+    <p>Sinopse: {{ movieDetails.overview }}</p>
+    <p>Nota: {{ movieDetails.vote_average }}</p>
+  </div>
+</main>

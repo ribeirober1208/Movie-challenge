@@ -1,36 +1,28 @@
 
-.movies-container {
+.details-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; 
-    margin: 50px;
-}
-
-
-.movie-item {
-    width: 18%; 
-    margin-bottom: 20px; 
-    box-sizing: border-box; 
-}
-
-#movie-poster {
+    align-items: center;
+    margin: 100px;
+  }
+  
+  .imgDetails {
+    margin-right: 20px; /* ou a margem desejada */
+  }
+  
+  .imgDetails img {
+   /* max-width: 100%;  Garante que a imagem não ultrapasse a largura do contêiner */
     width: 100%; 
     height: auto;
     border-radius: 5px;
-}    
+  }
+  
+  .details-text {
+    flex: 0.9; /* Alterado para 0.5 para ocupar metade do espaço disponível */
+    max-width: 90%;
+    justify-content: center;
+  }
+  .Back-to-home {
+   margin-top: 20px;
 
-
-#movie-title {
-    margin-top: 10px; 
-}
-
-
-.movie-info a {
-    text-decoration: none; 
-    color: #ff2200; 
-}
-
-
-.movie-item p {
-    margin-top: 5px; 
-}
+  }
+  
