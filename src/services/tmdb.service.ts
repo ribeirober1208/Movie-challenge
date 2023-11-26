@@ -14,6 +14,10 @@ export class TmdbService {
 
   constructor(private readonly _HTTP: HttpClient) {}
 
+  getMoviesByPages(page: number): Observable<any> {
+    return this._HTTP.get(`${this._BASE_URL}${this._ENDPOINT}?api_key=${this._KEY}&language=pt-BR&page=${page}`);
+  }
+
   getMovies(): Observable<any> {
     const url = `${this._BASE_URL}${this._ENDPOINT}?api_key=${this._KEY}&language=pt-BR&page=1`;
 
@@ -21,6 +25,7 @@ export class TmdbService {
       tap((data) => console.log(data)),
     );
   }
+
   getMovieDetails(movieId: string = ''): Observable<any> {
     const url = `${this._BASE_URL}${this._DETAILS_ENDPOINT}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
 
@@ -28,6 +33,4 @@ export class TmdbService {
       tap((data) => console.log(data)),
     );
   }
-
 }
-

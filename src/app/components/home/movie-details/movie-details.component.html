@@ -8,7 +8,7 @@
   </div>
 
   <div *ngIf="movieDetails" class="details-text">
-    <h2>{{ movieDetails.title }}</h2>
+    <h2 class="title">{{ movieDetails.title }}</h2>
     <p>Lançamento: {{ movieDetails.release_date | date: 'yyyy' }}</p>
     <p>Sinopse: {{ movieDetails.overview }}</p>
     <p>Nota: {{ movieDetails.vote_average }}</p>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TmdbService } from 'src/services/tmdb.service';
 
@@ -10,6 +10,7 @@ import { TmdbService } from 'src/services/tmdb.service';
 export class MovieDetailsComponent implements OnInit{
   movieId: string = '';
   movieDetails: any;
+  @Input() movies: any[] = [];
 
   constructor (private route: ActivatedRoute, private tmdbService: TmdbService) {}
 

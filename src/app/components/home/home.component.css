@@ -30,6 +30,11 @@
     color: #ff0000; 
 }
 
+.movie-info a:hover {
+    font-size: 20px;
+    color: #ff0000;
+}
+
 
 .movie-item p {
     margin-top: 5px; 

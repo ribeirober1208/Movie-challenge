@@ -1,0 +1,39 @@
+/* Estilo para a div que envolve a paginação */
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0; /* Espaçamento superior e inferior reduzido */
+}
+
+/* Estilo para os links das páginas */
+.page-link {
+  padding: 0.5rem 1rem; /* Espaçamento interno ajustado */
+  margin: 0 0.2rem; /* Margem entre os links */
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none; /* Remove sublinhado padrão */
+  color:white;
+}
+
+/* Estilo para o link da página atual */
+.page-link.current {
+  background-color: transparent
+}
+/* Adicione essa regra para remover os marcadores de lista */
+.page-item {
+  list-style: none;
+}
+/* Estilo para o link da página atual */
+.page-link.selected-page {
+  color: #ff1e00; /* Cor do texto para a página atual */
+  background-color: #fff; /* Cor de fundo para destacar a página atual */
+  border-radius: 10px;
+}
+
+

@@ -1,9 +1,14 @@
 <main class="movies-container">
     <div *ngFor="let movie of movies" class="movie-item" (click)="navigateToMovieDetail(movie.id)">
-        <img id="movie-poster" [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path"alt="{{ movie.title }} Poster">
+        <img id="movie-poster" [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path"
+            alt="{{ movie.title }} Poster">
         <h4 id="movie-title">{{ movie.title }}</h4>
         <p>Ano: {{ movie.release_date | date: 'yyyy' }}</p>
         <p class="movie-info"><a routerLink="/details/{{ movie.id }}">Sinopse</a></p>
-        
+
     </div>
+    <section id="pagination">
+        <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChanged)="onPageChanged($event)"></app-pagination>
+    </section>
+
 </main>
