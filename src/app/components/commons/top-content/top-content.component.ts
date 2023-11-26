@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output  } from '@angular/core';
 
 @Component({
   selector: 'app-top-content',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-content.component.css']
 })
 export class TopContentComponent {
+  @Output() filterEvent = new EventEmitter<string>();
 
 }
