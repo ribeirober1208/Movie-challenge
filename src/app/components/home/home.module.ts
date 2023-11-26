@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { TopExplorerComponent } from './top-explorer/top-explorer.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MovieListComponent } from './movie-list/movie-list.component';
     HomeComponent,
     MovieDetailsComponent,
     PaginationComponent,
-    MovieListComponent
+    MovieListComponent,
+    TopExplorerComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TmdbService } from 'src/services/tmdb.service';
+import { TopContentComponent } from '../commons/top-content/top-content.component';  
+
 
 
 @Component({
@@ -9,12 +11,20 @@ import { TmdbService } from 'src/services/tmdb.service';
 })
 
 export class HomeComponent implements OnInit {
-
+  @ViewChild(TopContentComponent) topContent!: TopContentComponent;
   currentPage: number = 1;
   totalPages: number = 0;
   movies: any[] = [];
   navigationService: any;
-  //navigationService: any;
+  genres: any[] = []; // Adicione um array para armazenar os gêneros
+  selectedGenre: string = ''; // Adicione uma variável para o gênero selecionado
+  orderOptions: any[] = ['popularity.desc', 'release_date.desc']; // Opções de ordenação
+  selectedOrder: string = 'popularity.desc'; 
+  
+  handleFilterEvent(filterValue: string) {
+    // Lógica para lidar com o evento de filtragem
+    console.log('Evento de Filtragem:', filterValue);
+  }
  
   //injeção
   constructor(private readonly  _SERVICE: TmdbService) { }
@@ -22,7 +32,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this._SERVICE.getMovies().subscribe((data: any) => {
       this.movies = data.results;  
+      this.genres = data.genres;
       this.loadMovies();
+
 
     });
   }
@@ -33,6 +45,11 @@ export class HomeComponent implements OnInit {
   onPageChanged(page: number) {
     console.log(page);
     this.currentPage = page;
+    this.loadMovies();
+  }
+  applyFiltersAndFetch() {
+    // Ao aplicar filtros, volte para a primeira página
+    this.currentPage = 1;
     this.loadMovies();
   }
 
