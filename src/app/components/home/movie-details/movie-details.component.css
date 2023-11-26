@@ -5,27 +5,28 @@
   background-color: rgb(44, 44, 44);
 }
 
-
 .details-container {
   display: flex;
-  align-items: center;
-  margin: 100px;
+  flex-wrap: wrap;
+  align-items: center; 
+  margin: 50px;
 }
 
 .imgDetails {
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .imgDetails img {
-  width: 100%;
+  width: 150%;
   height: auto;
   border-radius: 5px;
 }
 
 .details-text {
   flex: 0.9;
-  max-width: 90%;
-  justify-content: center;
+  max-width: 80%;
+  justify-content: center; 
+  margin-left: 100px;
 }
 
 .details-text p {
