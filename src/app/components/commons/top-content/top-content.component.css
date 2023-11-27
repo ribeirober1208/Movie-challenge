@@ -2,30 +2,34 @@
     border: none;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin: 0px;
+    margin-block-end: 30px;
+    margin-left: 0px;
+     
   }
   
-  #filter-container {
+  #filter-container { /*todos*/
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 5rem;
+    margin-left: 50px;
   }
   
   #filter-genre,
-  #form-control,
   #search,
   #order {
     width: 30%;
     font-size: 1rem;
     font-weight: 600; 
     color: white;
+    border-color: white;
     background-color:transparent;
     margin-top: 3rem;
     border-radius: 7px;
-    padding: 0.2rem;
-    border-color: white;
+    padding: 0.3rem;
+    padding-right: 0.2rem;
+    
   }
   
   #search-container {
@@ -34,22 +38,27 @@
     display: flex;
     justify-content: center;
     position: relative;
-    border: white;
-    border-radius: 7px;
   }
   
-  #search {
-    width: 50%;
+  #search { /*LUPA*/
+    width: 37%;
     margin-top: 3rem;
-    border: white;
-    border-radius: 7px;
+    border: 1px solid white; 
+    border-radius: 7px; 
+    background-color: transparent; 
+    justify-content: end;
   }
   
   .form-control::placeholder {
-    border: white;
-    color: white;
+    color: rgb(106, 103, 103);
     border-radius: 7px;
   }
+
+  .form-control {
+    border: transparent;
+    padding: auto;
+  }
+
   
   .btn-outline-success {
     font-size: 1rem;
