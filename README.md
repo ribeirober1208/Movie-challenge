@@ -100,7 +100,7 @@ e a ordenação.
 ## 7. Tecnologias
 
 <div style="display: flex; align-items: center; justify-content: center;">
-  <img alt="Angular" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-original.svg" />
+  <img alt="Angular" height="40" width="40" src="src/assets/angular.png" />
   <img alt="TypeScript" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
   <img alt="HTML" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
 </div>
