@@ -30,5 +30,23 @@ export class MovieDetailsComponent implements OnInit{
       }
     )
   }
-
+  getStarArray(rating: number): number[] {
+    const starArray = [];
+  
+    const numberOfFilledStars = Math.floor(rating / 2);
+    const numberOfEmptyStars = 5 - numberOfFilledStars;
+  
+    for (let i = 0; i < numberOfFilledStars; i++) {
+      starArray.push(i);
+    }
+  
+    // Adiciona um valor especial (por exemplo, -1) para representar estrelas vazias
+    for (let i = 0; i < numberOfEmptyStars; i++) {
+      starArray.push(-1);
+    }
+  
+    return starArray;
+  }
+  
 }
+

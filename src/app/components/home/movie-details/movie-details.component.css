@@ -1,6 +1,7 @@
 .title,
 .details-container,
 .details-text p,
+.star,
 .details-text {
   background-color: rgb(44, 44, 44);
 }
@@ -35,4 +36,23 @@
 
 .Back-to-home {
   margin-top: 20px;
+}
+
+.star-container {
+  background-color: transparent;
+  display: flex; /* Garante que as estrelas estejam em linha */
+}
+
+.star {
+  font-size: 1.5rem;
+  margin-right: 3px;
+}
+
+.filled {
+  color: gold;
+}
+
+.empty {
+  color: transparent;
+  border: 1px solid white; /* Adiciona borda branca às estrelas vazias */
 }
