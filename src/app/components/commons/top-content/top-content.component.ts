@@ -10,20 +10,39 @@ export class TopContentComponent {
   @Output() orderEvent = new EventEmitter<string>();
   @Output() searchEvent = new EventEmitter<string>();
 
-  applyFilter(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement)?.value || '';
-    this.filterEvent.emit(selectedValue);
-  }
+  // handleFilterEvent(event: any) {
+  //   console.log('Filter Event:', event);
+  //   const selectedValue = event.target?.value;
+  //   if (selectedValue !== undefined && selectedValue !== null) {
+  //     this.filterEvent.emit(selectedValue);
+  //   }
+  // }
 
-  applyOrder(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement)?.value || '';
-    this.orderEvent.emit(selectedValue);
-  }
+  // handleOrderEvent(event: any) {
+  //   console.log('Order Event:', event);
+  //   const selectedValue = event.target?.value;
+  //   if (selectedValue !== undefined && selectedValue !== null) {
+  //     this.orderEvent.emit(selectedValue);
+  //   }
+  // }
 
-  applySearch(event: Event) {
-    event.preventDefault();
-    const searchValue = (event.target as HTMLFormElement)?.querySelector('input')?.value || '';
-    this.searchEvent.emit(searchValue);
-  }
+  // handleSearchEvent(event: Event) {
+  //   console.log('Search Event:', event);
+  //   event.preventDefault();
+  //   const searchValue = (event.target as HTMLFormElement)?.querySelector('input')?.value || '';
+  //   this.searchEvent.emit(searchValue);
+  // }
+  // top-content.component.ts
+
+handleFilterEvent(event: any) {
+  console.log('Filter Event:', event);
+  this.filterEvent.emit(event.target.value);
+}
+
+handleOrderEvent(event: any) {
+  console.log('Order Event:', event);
+  this.orderEvent.emit(event.target.value);
+}
+
 }
 

@@ -31,13 +31,14 @@ export class HomeComponent implements OnInit {
 
   loadGenres() {
     this._SERVICE.getGenres().subscribe((data: any) => {
+      console.log(data.genres);
       this.genres = data.genres;
     });
   }
 
-  navigateToMovieDetail(movieId: number): void {
-    // Implemente a navegação para os detalhes do filme conforme necessário
-  }
+  // navigateToMovieDetail(movieId: number): void {
+  //   // Implemente a navegação para os detalhes do filme conforme necessário
+  // }
 
   onPageChanged(page: number) {
     console.log(page);
@@ -60,13 +61,13 @@ export class HomeComponent implements OnInit {
   }
   
   handleSearchEvent(searchValue: string) {
-    // Lógica para lidar com a pesquisa
+    
     console.log('Evento de Pesquisa:', searchValue);
   }
   loadMovies() {
     const filters = {
       genre: this.selectedGenre,
-      // Outros filtros, se necessário
+     
     };
 
     this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
