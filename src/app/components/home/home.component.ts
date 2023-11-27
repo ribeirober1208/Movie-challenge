@@ -20,26 +20,23 @@ export class HomeComponent implements OnInit {
   selectedGenre: string = ''; // Adicione uma variável para o gênero selecionado
   orderOptions: any[] = ['popularity.desc', 'release_date.desc']; // Opções de ordenação
   selectedOrder: string = 'popularity.desc'; 
-  
-  handleFilterEvent(filterValue: string) {
-    // Lógica para lidar com o evento de filtragem
-    console.log('Evento de Filtragem:', filterValue);
-  }
- 
-  //injeção
+
+   
   constructor(private readonly  _SERVICE: TmdbService) { }
-
+  
   ngOnInit() {
-    this._SERVICE.getMovies().subscribe((data: any) => {
-      this.movies = data.results;  
+    this.loadGenres(); // Carregar gêneros no início
+    this.applyFilters(); // Aplicar filtros iniciais
+  }
+
+  loadGenres() {
+    this._SERVICE.getGenres().subscribe((data: any) => {
       this.genres = data.genres;
-      this.loadMovies();
-
-
     });
   }
+
   navigateToMovieDetail(movieId: number): void {
-    this.navigationService.navigateToMovieDetail(movieId);
+    // Implemente a navegação para os detalhes do filme conforme necessário
   }
 
   onPageChanged(page: number) {
@@ -47,19 +44,37 @@ export class HomeComponent implements OnInit {
     this.currentPage = page;
     this.loadMovies();
   }
-  applyFiltersAndFetch() {
-    // Ao aplicar filtros, volte para a primeira página
-    this.currentPage = 1;
+
+  applyFilters() {
     this.loadMovies();
   }
 
+  handleFilterEvent(filterValue: string) {
+    this.selectedGenre = filterValue;
+    this.applyFilters();
+  }
+  
+  handleOrderEvent(orderValue: string) {
+    this.selectedOrder = orderValue;
+    this.applyFilters();
+  }
+  
+  handleSearchEvent(searchValue: string) {
+    // Lógica para lidar com a pesquisa
+    console.log('Evento de Pesquisa:', searchValue);
+  }
   loadMovies() {
-    this._SERVICE.getMoviesByPages(this.currentPage).subscribe({
+    const filters = {
+      genre: this.selectedGenre,
+      // Outros filtros, se necessário
+    };
+
+    this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
       next: (data: any) => {
         console.log(data);
         this.totalPages = data.total_pages;
         this.movies = data.results;
       }
-    })
+    });
   }
 }

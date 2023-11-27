@@ -47,7 +47,7 @@
     border-radius: 7px; 
     background-color: transparent; 
     justify-content: end;
-  }
+    }
   
   .form-control::placeholder {
     color: rgb(106, 103, 103);

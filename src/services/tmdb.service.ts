@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -11,21 +11,34 @@ export class TmdbService {
   private readonly _BASE_URL = 'https://api.themoviedb.org/3';
   private readonly _ENDPOINT = '/movie/popular';
   private readonly _DETAILS_ENDPOINT = '/movie';
+  private readonly _GENRES_ENDPOINT = '/genre/movie/list';
 
   constructor(private readonly _HTTP: HttpClient) {}
 
-  getMoviesByPages(page: number): Observable<any> {
-    return this._HTTP.get(`${this._BASE_URL}${this._ENDPOINT}?api_key=${this._KEY}&language=pt-BR&page=${page}`);
+  getMoviesByPages(page: number, filters?: any, sortBy: string = 'popularity.desc'): Observable<any> {
+    let params = new HttpParams()
+      .set('api_key', this._KEY)
+      .set('language', 'pt-BR')
+      .set('page', page.toString());
+
+    // Aplicar filtros, se fornecidos
+    if (filters) {
+      if (filters.genre) {
+        params = params.set('with_genres', filters.genre);
+      }
+      // Outros filtros podem ser adicionados conforme necessário
+    }
+
+    // Aplicar ordenação
+    params = params.set('sort_by', sortBy);
+
+    return this._HTTP.get(`${this._BASE_URL}${this._ENDPOINT}`, { params });
   }
 
-  getMovies(): Observable<any> {
-    const url = `${this._BASE_URL}${this._ENDPOINT}?api_key=${this._KEY}&language=pt-BR&page=1`;
-
-    return this._HTTP.get(url).pipe(
-      tap((data) => console.log(data)),
-    );
+  getGenres(): Observable<any> {
+    return this._HTTP.get(`${this._BASE_URL}${this._GENRES_ENDPOINT}?api_key=${this._KEY}&language=pt-BR`);
   }
-
+  
   getMovieDetails(movieId: string = ''): Observable<any> {
     const url = `${this._BASE_URL}${this._DETAILS_ENDPOINT}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
 
