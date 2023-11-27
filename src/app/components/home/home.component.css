@@ -39,3 +39,7 @@
 .movie-item p {
     margin-top: 5px; 
 }
+#movie-poster:hover{
+  border: 2px solid red;
+  opacity: 0.8;
+}
