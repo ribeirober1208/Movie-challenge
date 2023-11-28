@@ -14,7 +14,28 @@ export class TmdbService {
   private readonly _GENRES_ENDPOINT = '/genre/movie/list';
 
   constructor(private readonly _HTTP: HttpClient) {}
+  
+  getMovies(page: number): Observable<any> {
+    const url = `${this._BASE_URL}/discover/movie`;
+    const params = { api_key: this._KEY, page: page.toString() };
 
+    return this._HTTP.get(url, { params });
+  }
+
+  getMoviesByGender(id: string): Observable<any> {
+    const url = `${this._BASE_URL}/discover/movie`;
+    const params = { api_key: this._KEY, with_genres: id };
+
+    return this._HTTP.get(url, { params });
+  }
+
+  getGenderList(): Observable<any> {
+    const url = `${this._BASE_URL}/genre/movie/list`;
+    const params = { api_key: this._KEY };
+
+    return this._HTTP.get(url, { params });
+  }
+  
   getMoviesByPages(page: number, filters?: any, sortBy: string = 'popularity.desc'): Observable<any> {
     let params = new HttpParams()
       .set('api_key', this._KEY)
@@ -35,7 +56,10 @@ export class TmdbService {
   }
 
   getGenres(): Observable<any> {
-    return this._HTTP.get(`${this._BASE_URL}${this._GENRES_ENDPOINT}?api_key=${this._KEY}&language=pt-BR`);
+    const url = `${this._BASE_URL}/genre/movie/list`;
+    const params = { api_key: this._KEY };
+
+    return this._HTTP.get(url, { params });
   }
   
   getMovieDetails(movieId: string = ''): Observable<any> {
