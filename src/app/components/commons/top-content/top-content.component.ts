@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output  } from '@angular/core';
+// top-content.component.ts
+
+import { Component, EventEmitter, Output, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-top-content',
@@ -6,43 +8,64 @@ import { Component, EventEmitter, Output  } from '@angular/core';
   styleUrls: ['./top-content.component.css']
 })
 export class TopContentComponent {
+
   @Output() filterEvent = new EventEmitter<string>();
   @Output() orderEvent = new EventEmitter<string>();
   @Output() searchEvent = new EventEmitter<string>();
+  @Input() genres: any[] = []; 
+  @Input() orderOptions: any[] = [
+    {
+      order: "popularity.desc",
+      name: "Mais populares",
+    },
+    {
+      order: "popularity.asc",
+      name: "Menos populares",
+    },
+    {
+      order: "primary_release_date.desc",
+      name: "Mais recentes",
+    },
+    {
+      order: "primary_release_date.asc",
+      name: "Menos recentes",
+    },
+    {
+      order: "vote_average.desc", 
+      name: "Maiores notas",
+    },
+    {
+      order: "vote_average.asc", 
+      name: "Menores notas",
+    },
+    {
+      order: "vote_count.desc",
+      name: "Mais votados",
+    },
+    {
+      order: "vote_count.asc", 
+      name: "Menos votados",
+    }
+  ];
+  @Input() selectedGenre: string = '';
+  @Input() selectedOrder: string = '';
+  
+  @ViewChild("filter") filter!: ElementRef<HTMLInputElement>;
+  @ViewChild("order") order!: ElementRef<HTMLSelectElement>;
+  @ViewChild("search") search!: ElementRef<HTMLInputElement>;
 
-  // handleFilterEvent(event: any) {
-  //   console.log('Filter Event:', event);
-  //   const selectedValue = event.target?.value;
-  //   if (selectedValue !== undefined && selectedValue !== null) {
-  //     this.filterEvent.emit(selectedValue);
-  //   }
-  // }
+  handleFilterEvent() {
+    console.log('Evento de Filtro:', this.filter.nativeElement.value);
+    this.filterEvent.emit(this.filter.nativeElement.value);
+  }
 
-  // handleOrderEvent(event: any) {
-  //   console.log('Order Event:', event);
-  //   const selectedValue = event.target?.value;
-  //   if (selectedValue !== undefined && selectedValue !== null) {
-  //     this.orderEvent.emit(selectedValue);
-  //   }
-  // }
+  handleOrderEvent() {
+    console.log('Evento de Ordem:', this.order.nativeElement.value);
+    this.orderEvent.emit(this.order.nativeElement.value);
+  }
 
-  // handleSearchEvent(event: Event) {
-  //   console.log('Search Event:', event);
-  //   event.preventDefault();
-  //   const searchValue = (event.target as HTMLFormElement)?.querySelector('input')?.value || '';
-  //   this.searchEvent.emit(searchValue);
-  // }
-  // top-content.component.ts
-
-handleFilterEvent(event: any) {
-  console.log('Filter Event:', event);
-  this.filterEvent.emit(event.target.value);
+  handleSearchEvent() {
+    console.log('Evento de Pesquisa:', this.search.nativeElement.value);
+    this.searchEvent.emit(this.search.nativeElement.value);
+  }
 }
-
-handleOrderEvent(event: any) {
-  console.log('Order Event:', event);
-  this.orderEvent.emit(event.target.value);
-}
-
-}
-

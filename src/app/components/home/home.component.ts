@@ -1,8 +1,7 @@
+//home.component.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TmdbService } from 'src/services/tmdb.service';
 import { TopContentComponent } from '../commons/top-content/top-content.component';  
-
-
 
 @Component({
   selector: 'app-home',
@@ -16,9 +15,9 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   movies: any[] = [];
   navigationService: any;
-  genres: any[] = []; // Adicione um array para armazenar os gêneros
-  selectedGenre: string = ''; // Adicione uma variável para o gênero selecionado
-  orderOptions: any[] = ['popularity.desc', 'release_date.desc']; // Opções de ordenação
+  genres: any[] = []; 
+  selectedGenre: string = ''; 
+  orderOptions: any[] = [];   
   selectedOrder: string = 'popularity.desc'; 
 
    
@@ -33,12 +32,9 @@ export class HomeComponent implements OnInit {
     this._SERVICE.getGenres().subscribe((data: any) => {
       console.log(data.genres);
       this.genres = data.genres;
+      this.orderOptions = ['popularity.desc', 'release_date.desc'];
     });
   }
-
-  // navigateToMovieDetail(movieId: number): void {
-  //   // Implemente a navegação para os detalhes do filme conforme necessário
-  // }
 
   onPageChanged(page: number) {
     console.log(page);
@@ -61,7 +57,7 @@ export class HomeComponent implements OnInit {
   }
   
   handleSearchEvent(searchValue: string) {
-    
+    // Lógica para lidar com a pesquisa
     console.log('Evento de Pesquisa:', searchValue);
   }
   loadMovies() {

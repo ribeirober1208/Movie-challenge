@@ -2,23 +2,17 @@
 
 <section id="top-content-container">
   <div id="filter-container">
-    <select id="filter-genre" (change)="handleFilterEvent($event)">
+    <select id="filter-genre" (change)="handleFilterEvent()">
       <option value="">Gênero</option>
-      <!-- Adicione opções de gênero dinamicamente, se necessário -->
+      <option *ngFor="let genre of genres" [value]= "genre.id">{{ genre.name }}</option>
     </select>
-    <select id="order" (change)="handleOrderEvent($event)">
+    <select id="order" (change)="handleOrderEvent()">
       <option value="">Ordenar por</option>
-      <!-- Adicione opções de ordenação dinamicamente, se necessário -->
-    </select>
+      <option *ngFor="let option of orderOptions" [value]="option">{{ option.name }}</option>
+    </select>     
   </div>
   <div id="search-container">
     <section id="search">
-      <!-- <form class="d-flex" (submit)="handleSearchEvent($event)">
-        <input class="form-control" type="search" placeholder="Pesquisa">
-        <button class="btn btn-outline-success" type="submit">
-          <img src="assets/Search.png" alt="Buscar">
-        </button>
-      </form> -->
       <form class="d-flex">
         <input class="form-control" type="search" placeholder="Pesquisa">
         <button class="btn btn-outline-success" type="submit">

@@ -26,7 +26,6 @@ export class TmdbService {
       if (filters.genre) {
         params = params.set('with_genres', filters.genre);
       }
-      // Outros filtros podem ser adicionados conforme necessário
     }
 
     // Aplicar ordenação
