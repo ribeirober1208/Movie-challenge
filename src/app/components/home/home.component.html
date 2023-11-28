@@ -1,14 +1,25 @@
+<!-- top-content.component.html -->
+<app-top-content   
+[genres]="genres"
+[ordersOpions]="orderOptions"
+[selectedGenre]="selectedGenre"
+[selectedOrder]="selectedOrder"
+(filterEvent)="handleFilterEvent($event)"
+(orderEvent)="handleOrderEvent($event)"
+(searchEvent)="handleSearchEvent($event)"
+></app-top-content>
+
 <main class="movies-container">
-    <div *ngFor="let movie of movies" class="movie-item">
-      <img id="movie-poster" [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path"
-           alt="{{ movie.title }} Poster" [routerLink]="['/details', movie.id]">
-      <h4 id="movie-title">{{ movie.title }}</h4>
-      <p>Ano: {{ movie.release_date | date: 'yyyy' }}</p>
-      <!--<p class="movie-info"><a routerLink="/details/{{ movie.id }}">Sinopse</a></p>-->
-    </div>
-  
-    <section id="pagination">
-      <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChanged)="onPageChanged($event)"></app-pagination>
-    </section>
-  </main>
-  
+  <div *ngFor="let movie of movies" class="movie-item">
+    <img id="movie-poster" [src]="'https://image.tmdb.org/t/p/w200/' + movie.poster_path" alt="{{ movie.title }} Poster"
+      [routerLink]="['/details', movie.id]">
+    <h4 id="movie-title">{{ movie.title }}</h4>
+    <p>Ano: {{ movie.release_date | date: 'yyyy' }}</p>
+    <!--<p class="movie-info"><a routerLink="/details/{{ movie.id }}">Sinopse</a></p>-->
+  </div>
+
+  <section id="pagination">
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages"
+      (pageChanged)="onPageChanged($event)"></app-pagination>
+  </section>
+</main>

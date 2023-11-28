@@ -1,8 +1,8 @@
+//home.component.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TmdbService } from 'src/services/tmdb.service';
-import { TopContentComponent } from '../commons/top-content/top-content.component';  
-
-
+import { TopContentComponent } from '../commons/top-content/top-content.component'; 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,27 +16,44 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   movies: any[] = [];
   navigationService: any;
-  genres: any[] = []; // Adicione um array para armazenar os gêneros
-  selectedGenre: string = ''; // Adicione uma variável para o gênero selecionado
-  orderOptions: any[] = ['popularity.desc', 'release_date.desc']; // Opções de ordenação
+  genres: any[] = []; 
+  selectedGenre: string = ''; 
+  orderOptions: any[] = [];   
   selectedOrder: string = 'popularity.desc'; 
+  moviesByGender: string | undefined;
+  selectedGenreId?: string;;
+  search: string = '';
+  searchMovie: any;
+  allMovies:any[] = [];
+
 
    
-  constructor(private readonly  _SERVICE: TmdbService) { }
+  constructor(private readonly  _SERVICE: TmdbService, private readonly route: ActivatedRoute) {}
   
-  ngOnInit() {
+  ngOnInit(): void {
+    const queryParams = this.route.snapshot.queryParamMap;
+    if (
+      queryParams.get('genres') !== undefined &&
+      queryParams.get('order') !== undefined &&
+      queryParams.get('pageNumber') !== undefined
+    ) {
+      this.selectedGenreId = queryParams.get('genres')?.toString();
+      this.selectedOrder = queryParams.get('order')?.toString() || 'popularity.desc';
+
+      const pageNumberParam = queryParams.get('pageNumber');
+      this.currentPage = pageNumberParam !== null ? parseInt(pageNumberParam, 10) : 1;
+      
     this.loadGenres(); // Carregar gêneros no início
     this.applyFilters(); // Aplicar filtros iniciais
+  }
   }
 
   loadGenres() {
     this._SERVICE.getGenres().subscribe((data: any) => {
+      console.log(data.genres);
       this.genres = data.genres;
+      this.orderOptions = ['popularity.desc', 'release_date.desc'];
     });
-  }
-
-  navigateToMovieDetail(movieId: number): void {
-    // Implemente a navegação para os detalhes do filme conforme necessário
   }
 
   onPageChanged(page: number) {
@@ -66,7 +83,7 @@ export class HomeComponent implements OnInit {
   loadMovies() {
     const filters = {
       genre: this.selectedGenre,
-      // Outros filtros, se necessário
+     
     };
 
     this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
@@ -77,4 +94,54 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-}
+  genderList() {
+    this._SERVICE.getGenderList().subscribe({
+      next: (data: any) => {
+        console.log(data); 
+        this.genres = data.genres;  
+      }
+    });
+  }
+  
+  // Atualiza selectedGenreId com o valor do evento e chama getMoviesWhithGender.
+  getSelectedGener(event:any){
+    console.log(event);
+       this.selectedGenreId = event;
+       this.getMoviesWhithGender(event);
+       this.loadMovies();
+  }
+  
+  //Obtém filmes por gênero chamando o serviço.
+  getMoviesWhithGender(id: string) {
+    this._SERVICE.getMoviesByGender(id).subscribe({
+      next: (data: any) => {
+        this.moviesByGender = data;
+        this.totalPages = data.total_pages;
+        this.movies = data.results;
+      }
+    });
+  }
+  
+   //Atualiza a selectedOrder com o valor do evento e chama loadMoviesWhitSelectedOrder.
+    getSelectedOrder(event: string) {
+      this.selectedOrder = event;
+      // this.loadMoviesWithOrder();
+      this.loadMovies();
+    }
+  
+  //Atualiza a searchMovie com o valor do evento .
+  getSearch(event:any){
+    this.searchMovie = event; 
+  }
+  
+  //Verifica se o o value buscado está presente na lista de filmes
+  searchMoviesList() {
+    this._SERVICE.getMovies(this.currentPage).subscribe((data) => {
+      this.allMovies = data.results;
+      const value = this.searchMovie.toLowerCase();
+      this.movies = this.allMovies.filter((movie) => {
+      return movie.title.toLowerCase().includes(value);
+      });
+    }); 
+  }}
+

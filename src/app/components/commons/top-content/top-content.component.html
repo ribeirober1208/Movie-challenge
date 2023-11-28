@@ -1,21 +1,25 @@
+<!-- top-content.component.html -->
+
 <section id="top-content-container">
-    <div id="filter-container">
-      <select id="filter-genre">
-        <option value="">Gênero</option>
-      </select>
-      <select id="order">
-        <option value="">Ordenar por</option>
-      </select>
-    </div>
-    <div id="search-container">
-      <section id="search">
-        <form class="d-flex">
-          <input class="form-control" type="search" placeholder="Pesquisa">
-          <button class="btn btn-outline-success" type="submit">
-            <img src="assets/Search.png" alt="Buscar">
-          </button>
-          
-        </form>
-      </section>
-    </div>
-  </section>
+  <div id="filter-container">
+    <select id="filter-genre" (change)="handleFilterEvent()">
+      <option value="">Gênero</option>
+      <option *ngFor="let genre of genres" [value]= "genre.id">{{ genre.name }}</option>
+    </select>
+    <select id="order" (change)="handleOrderEvent()">
+      <option value="">Ordenar por</option>
+      <option *ngFor="let option of orderOptions" [value]="option">{{ option.name }}</option>
+    </select>     
+  </div>
+  <div id="search-container">
+    <section id="search">
+      <form class="d-flex">
+        <input class="form-control" type="search" placeholder="Pesquisa">
+        <button class="btn btn-outline-success" type="submit">
+          <img src="assets/Search.png" alt="Buscar">
+        </button>
+      </form>
+      
+    </section>
+  </div>
+</section>
