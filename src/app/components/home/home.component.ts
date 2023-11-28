@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
   
   handleSearchEvent(searchValue: string) {
-    
+    // Lógica para lidar com a pesquisa
     console.log('Evento de Pesquisa:', searchValue);
   }
   loadMovies() {

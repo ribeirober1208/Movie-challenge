@@ -1,48 +1,86 @@
-import { Component, EventEmitter, Output  } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit, untracked } from '@angular/core';
 
 @Component({
   selector: 'app-top-content',
   templateUrl: './top-content.component.html',
   styleUrls: ['./top-content.component.css']
 })
-export class TopContentComponent {
-  @Output() filterEvent = new EventEmitter<string>();
-  @Output() orderEvent = new EventEmitter<string>();
-  @Output() searchEvent = new EventEmitter<string>();
+export class TopContentComponent implements OnInit {
+  @Output() getSelectedGenerEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() getSelectedOrderEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() getSearchEmitter: EventEmitter<string> = new EventEmitter<string>();
+  //o botão é emitido como void porque ele não tem retorno
+  @Output() searchButtonClick: EventEmitter<void> = new EventEmitter<void>();
+  @Input() genres: any[] = [];
+  //O view child é como o getElement, ele consegue acessar o valor do elemento
+  //através de uma variável de escopo
+  @ViewChild("filter") filter!: ElementRef;
+  @ViewChild("order") order!: ElementRef;
+  @ViewChild("search") search!: ElementRef;
 
-  // handleFilterEvent(event: any) {
-  //   console.log('Filter Event:', event);
-  //   const selectedValue = event.target?.value;
-  //   if (selectedValue !== undefined && selectedValue !== null) {
-  //     this.filterEvent.emit(selectedValue);
-  //   }
-  // }
+  //Array com a lista de ordenações da API
+  orderList: any[] = [
+    {
+      order: "popularity.desc",
+      name: "Mais populares",
+    },
+    {
+      order: "popularity.asc",
+      name: "Menos populares",
+    },
+    {
+      order: "primary_release_date.desc",
+      name: "Mais recentes",
+    },
+    {
+      order: "primary_release_date.asc",
+      name: "Menos recentes",
+    },
+    {
+      order: "vote_average.desc", 
+      name: "Maiores notas",
+    },
+    {
+      order: "vote_average.asc", 
+      name: "Menores notas",
+    },
+    {
+      order: "vote_count.desc",
+      name: "Mais votados",
+    },
+    {
+      order: "vote_count.asc", 
+      name: "Menos votados",
+    }
+  ]
+  
+  
+  constructor() {}
 
-  // handleOrderEvent(event: any) {
-  //   console.log('Order Event:', event);
-  //   const selectedValue = event.target?.value;
-  //   if (selectedValue !== undefined && selectedValue !== null) {
-  //     this.orderEvent.emit(selectedValue);
-  //   }
-  // }
+  ngOnInit(): void {}
 
-  // handleSearchEvent(event: Event) {
-  //   console.log('Search Event:', event);
-  //   event.preventDefault();
-  //   const searchValue = (event.target as HTMLFormElement)?.querySelector('input')?.value || '';
-  //   this.searchEvent.emit(searchValue);
-  // }
-  // top-content.component.ts
+  //Captura os valores dos eventos e emite para a home
+  getSelectedGener(event: any) {
+    this.getSelectedGenerEmitter.emit(event.target.value);
+  }
 
-handleFilterEvent(event: any) {
-  console.log('Filter Event:', event);
-  this.filterEvent.emit(event.target.value);
+  getSelectedOrder(event: any) {
+   this.getSelectedOrderEmitter.emit(event.target.value);   
+  }
+
+  getSearch(event: any) {
+    this.getSearchEmitter.emit(event.target.value);    
+   }
+
+  //Emite o clique no botão para acessar o e.value do search
+  onSearchButtonClick() {
+    this.searchButtonClick.emit();
+  }
+
+  //Emite os eventos vazios para limpar as buscas
+  clear(){
+    this.getSelectedGenerEmitter.emit("0");
+    this.getSelectedOrderEmitter.emit("");
+    this.getSearchEmitter.emit("");
+  }
 }
-
-handleOrderEvent(event: any) {
-  console.log('Order Event:', event);
-  this.orderEvent.emit(event.target.value);
-}
-
-}
-

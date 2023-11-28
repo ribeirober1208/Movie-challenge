@@ -1,31 +1,17 @@
-<!-- top-content.component.html -->
+<div class="top-content" *ngIf="genres">
+  <select class="select-content" #filter (change)="getSelectedGener($event)">
+    <option value="0"disabled selected>Selecionar gênero</option>
+    <option *ngFor="let genre of genres" [value]= "genre.id">{{ genre.name }}</option>
+  </select>
 
-<section id="top-content-container">
-  <div id="filter-container">
-    <select id="filter-genre" (change)="handleFilterEvent($event)">
-      <option value="">Gênero</option>
-      <!-- Adicione opções de gênero dinamicamente, se necessário -->
-    </select>
-    <select id="order" (change)="handleOrderEvent($event)">
-      <option value="">Ordenar por</option>
-      <!-- Adicione opções de ordenação dinamicamente, se necessário -->
-    </select>
-  </div>
-  <div id="search-container">
-    <section id="search">
-      <!-- <form class="d-flex" (submit)="handleSearchEvent($event)">
-        <input class="form-control" type="search" placeholder="Pesquisa">
-        <button class="btn btn-outline-success" type="submit">
-          <img src="assets/Search.png" alt="Buscar">
-        </button>
-      </form> -->
-      <form class="d-flex">
-        <input class="form-control" type="search" placeholder="Pesquisa">
-        <button class="btn btn-outline-success" type="submit">
-          <img src="assets/Search.png" alt="Buscar">
-        </button>
-      </form>
-      
-    </section>
-  </div>
-</section>
+  <select class="select-content"  #order (change)="getSelectedOrder($event)">
+    <option value="" disabled selected>Selecionar ordenação</option>
+    <option *ngFor="let order of orderList"  [value]= "order.order">{{ order.name }}</option>
+  </select>    
+
+  <form class="d-flex">
+    <input class="form-control me-2" #search (change)="getSearch($event)" type="search" placeholder="Search" aria-label="Search">
+    <button (click)="onSearchButtonClick()" class= "btn btn-outline-success" type="button">Buscar</button>
+  </form>
+  <button (click)="clear()" class="btn btn-outline-success" type="button">Limpar Buscas</button>
+</div>
