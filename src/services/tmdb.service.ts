@@ -15,7 +15,7 @@ export class TmdbService {
 
   constructor(private readonly _HTTP: HttpClient) {}
   
-  getMovies(page: number): Observable<any> {
+  getMovies(page: number, genre?: string, order?: string): Observable<any> {
     const url = `${this._BASE_URL}/discover/movie`;
     const params = { api_key: this._KEY, page: page.toString() };
 

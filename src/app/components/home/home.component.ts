@@ -83,8 +83,18 @@ export class HomeComponent implements OnInit {
   loadMovies() {
     const filters = {
       genre: this.selectedGenre,
-     
-    };
+      
+    }
+    const genreParam = this.selectedGenreId ? this.selectedGenreId : undefined;
+    const orderParam = this.selectedOrder ? this.selectedOrder : undefined;
+  
+    this._SERVICE.getMovies(this.currentPage, genreParam, orderParam).subscribe({
+      next: (data: any) => {
+        this.totalPages = data.total_pages;
+        this.movies = data.results;
+      }
+    });
+  
 
     this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
       next: (data: any) => {
