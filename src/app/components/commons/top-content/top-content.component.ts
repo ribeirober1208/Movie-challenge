@@ -81,18 +81,18 @@ export class TopContentComponent implements OnInit {
     this.searchEvent.emit("");
   }
 
-  handleFilterEvent() {
-    console.log('Evento de Filtro:', this.filter.nativeElement.value);
-    this.filterEvent.emit(this.filter.nativeElement.value);
+  handleFilterEvent(event: Event) {
+    console.log((event.target as HTMLSelectElement).value);
+    this.filterEvent.emit((event.target as HTMLSelectElement).value);
   }
 
-  handleOrderEvent() {
-    console.log('Evento de Ordem:', this.order.nativeElement.value);
-    this.orderEvent.emit(this.order.nativeElement.value);
+  handleOrderEvent(event: Event) {
+    console.log((event.target as HTMLSelectElement).value);
+    this.orderEvent.emit((event.target as HTMLSelectElement).value);
   }
 
-  handleSearchEvent() {
-    console.log('Evento de Pesquisa:', this.search.nativeElement.value);
-    this.searchEvent.emit(this.search.nativeElement.value);
+  handleSearchEvent(event: Event) {
+    console.log((event.target as HTMLSelectElement).value);
+    this.searchEvent.emit((event.target as HTMLSelectElement).value);
   }
 }

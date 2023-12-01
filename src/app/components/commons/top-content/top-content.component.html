@@ -2,11 +2,11 @@
 
 <section id="top-content-container">
   <div id="filter-container">
-    <select id="filter-genre" (change)="handleFilterEvent()">
+    <select id="filter-genre" (change)="handleFilterEvent($event)">
       <option value="">Gênero</option>
       <option *ngFor="let genre of genres" [value]= "genre.id">{{ genre.name }}</option>
     </select>
-    <select id="order" (change)="handleOrderEvent()">
+    <select id="order" (change)="handleOrderEvent($event)">
       <option value="">Ordenar por</option>
       <option *ngFor="let option of orderOptions" [value]="option">{{ option.name }}</option>
     </select>     
