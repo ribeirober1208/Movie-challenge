@@ -6,9 +6,15 @@ import { MovieDetailsComponent } from './components/home/movie-details/movie-det
 
 const routes: Routes = [
   {
-    path:'', component: HomeComponent,
-    loadChildren: () => import('./components/home/home.module').then( m => HomeModule) 
+    path:'', 
+    component: HomeComponent,
+     
   },
+  
+  {
+    path:'',
+    loadChildren: () => import('./components/home/home.module').then( m => HomeModule)},
+
   {
     path: 'details/:id',
     component: MovieDetailsComponent,

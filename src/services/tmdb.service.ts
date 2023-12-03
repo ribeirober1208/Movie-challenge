@@ -9,30 +9,26 @@ import { tap } from 'rxjs/operators';
 export class TmdbService {
   private readonly _KEY = '5d900fd5a214dd86a0e9204cc6d49fa9';
   private readonly _BASE_URL = 'https://api.themoviedb.org/3';
-  private readonly _APPEND = `?include_adult=false&language=en&api_key=${this._KEY}&page=`;
   private readonly _ENDPOINT = '/movie/popular';
   private readonly _DETAILS_ENDPOINT = '/movie';
-  private readonly _SORT = `&sort_by=`;
-  private readonly _DISCOVER = `${this._BASE_URL}discover/movie${this._APPEND}`;
-  private readonly _ID = `${this._BASE_URL}movie`;
-  private readonly _GENRELIST = `${this._BASE_URL}genre/movie/list`;
-  private readonly _SELECTGENRE = `&with_genres=`;
-  private readonly _SEARCH = `&with_keywords=`;
+  private readonly _GENRES_ENDPOINT = '/genre/movie/list';
 
   constructor(private readonly _HTTP: HttpClient) {}
-  //REPETIR PARA O DEMAIS ENDPOINTS*******************************************
+  
   getMovies(page: number, genre?: string, order?: string): Observable<any> {
-    const url = `${this._BASE_URL}/discover/movie${this._APPEND}`;
+    const url = `${this._BASE_URL}/discover/movie`;
     const params = { api_key: this._KEY, page: page.toString() };
-    return this._HTTP.get(`${this._BASE_URL}${this._DISCOVER}`, { params });
+
+    return this._HTTP.get(url, { params });
   }
 
   getMoviesByGender(id: string): Observable<any> {
-    const url = `${this._BASE_URL}/discover/movie${this._APPEND}`;
+    const url = `${this._BASE_URL}/discover/movie`;
     const params = { api_key: this._KEY, with_genres: id };
-    return this._HTTP.get(`${this._BASE_URL}${this._DISCOVER}`, { params });
+
+    return this._HTTP.get(url, { params });
   }
-//************************************************** */
+
   getGenderList(): Observable<any> {
     const url = `${this._BASE_URL}/genre/movie/list`;
     const params = { api_key: this._KEY };

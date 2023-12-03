@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit {
   }
 
   handleFilterEvent(filterValue: string) {
+    console.log(filterValue)
     this.selectedGenre = filterValue;
     this.applyFilters();
   }
@@ -135,9 +136,12 @@ export class HomeComponent implements OnInit {
    //Atualiza a selectedOrder com o valor do evento e chama loadMoviesWhitSelectedOrder.
     getSelectedOrder(event: string) {
       this.selectedOrder = event;
-      // this.loadMoviesWithOrder();
+      this.loadMoviesWithOrder();
       this.loadMovies();
     }
+  loadMoviesWithOrder() {
+    throw new Error('Method not implemented.');
+  }
   
   //Atualiza a searchMovie com o valor do evento .
   getSearch(event:any){
@@ -154,4 +158,3 @@ export class HomeComponent implements OnInit {
       });
     }); 
   }}
-
