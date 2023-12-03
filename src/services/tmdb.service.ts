@@ -45,22 +45,28 @@ export class TmdbService {
       .join('&');
   }
   
-  
-//próxima função ************************************************************
-
   getMoviesByGender(id: string): Observable<any> {
-    const url = `${this._BASE_URL}/discover/movie`; 
-    const params = { api_key: this._KEY, with_genres: id };
-
-    return this._HTTP.get(url, { params }); //*** inclui url _DISCOVER****************************
+    const params: any = {
+      api_key: this._KEY,
+      with_genres: id
+    };
+  
+    const url = `${this._BASE_URL}/discover/movie${this._DISCOVER}`;
+    
+    console.log(url);
+    return this._HTTP.get(url, { params });
   }
-
+  
   getGenderList(): Observable<any> {
-    const url = `${this._BASE_URL}/genre/movie/list`;
-    const params = { api_key: this._KEY };
-
-    return this._HTTP.get(url, { params }); //*** inclui url _GENRES******************************
+    const url = `${this._BASE_URL}/genre/movie/list${this._GENRES}`;
+    const params: any = {
+      api_key: this._KEY
+    };
+  
+    console.log(url);
+    return this._HTTP.get(url, { params });
   }
+  //próxima função ************************************************************
 
   getMoviesByPages(page: number, filters?: any, sortBy: string = 'popularity.desc'): Observable<any> {
     let params = new HttpParams()
