@@ -31,20 +31,20 @@ export class TmdbService {
       sort_by: order
     };
   
-    const url = `${this._BASE_URL}/discover/movie${this.buildQueryString(params)}`;
+    const queryString = this.buildQueryString(params);
+    const url = `${this._BASE_URL}/discover/movie${this._APPEND}${queryString}`;
     
     console.log(url);
     return this._HTTP.get(url);
   }
   
   private buildQueryString(params: any): string {
-    const queryString = Object.keys(params)
+    return Object.keys(params)
       .map(key => params[key] ? `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}` : '')
       .filter(Boolean)
       .join('&');
-  
-    return queryString ? `?${queryString}` : '';
   }
+  
   
 //próxima função ************************************************************
 
