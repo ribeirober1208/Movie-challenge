@@ -13,22 +13,38 @@ export class TmdbService {
   private readonly _ORDER = `/movie/popular`;
   private readonly _DETAILS = `/movie`;
   //alterar somente daqui para baixo, o trecho acima mantém a lista
-  private readonly _SORT = `&sort_by=`
-  private readonly _DISCOVER = `${this._BASE_URL}discover/movie${this._APPEND}` 
-  private readonly _ID = `${this._BASE_URL}movie`
-  private readonly _GENRES = `${this._BASE_URL}genre/movie/list`
-  private readonly _SELECTGENRE = `&with_genres=`
-  private readonly _SEARCH = `&with_keywords=`
+  private readonly _SORT = `&sort_by=` //***criar função*******************/
+  private readonly _DISCOVER = `${this._BASE_URL}discover/movie${this._APPEND}` //***ajustar URL função*******************
+  private readonly _ID = `${this._BASE_URL}movie`//***criar função*******************
+  private readonly _GENRES = `${this._BASE_URL}genre/movie/list`/***ajustar URL função*****************/
+  private readonly _SELECTGENRE = `&with_genres=` //***criar função*******************
+  private readonly _SEARCH = `&with_keywords=`//***criar função*******************
   
 
   constructor(private readonly _HTTP: HttpClient) {}
   
   getMovies(page: number, genre?: string, order?: string): Observable<any> {
-    const url = `${this._BASE_URL}/discover/movie`;
-    const params = { api_key: this._KEY, page: page.toString() };
-
-    return this._HTTP.get(url, { params }); //*** inclui url _DISCOVER****************************
+    const base_url = `${this._BASE_URL}/discover/movie`;
+    const params: any = { api_key: this._KEY, page: page.toString() };
+  
+    if (genre) {
+      params.with_genres = genre;
+    }
+  
+    if (order) {
+      params.sort_by = order;
+    }
+  
+    console.log(`${base_url}?${this.buildQueryString(params)}`);
+    return this._HTTP.get(base_url, { params });
   }
+  
+  private buildQueryString(params: any): string {
+    return Object.keys(params)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+      .join('&');
+  }
+  
 
   getMoviesByGender(id: string): Observable<any> {
     const url = `${this._BASE_URL}/discover/movie`; 
@@ -43,7 +59,7 @@ export class TmdbService {
 
     return this._HTTP.get(url, { params }); //*** inclui url _GENRES******************************
   }
-  
+
   getMoviesByPages(page: number, filters?: any, sortBy: string = 'popularity.desc'): Observable<any> {
     let params = new HttpParams()
       .set('api_key', this._KEY)

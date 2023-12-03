@@ -96,7 +96,6 @@ export class HomeComponent implements OnInit {
       }
     });
   
-
     this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -104,6 +103,10 @@ export class HomeComponent implements OnInit {
         this.movies = data.results;
       }
     });
+    
+    
+   
+    
   }
   genderList() {
     this._SERVICE.getGenderList().subscribe({
