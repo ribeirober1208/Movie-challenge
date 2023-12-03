@@ -24,27 +24,29 @@ export class TmdbService {
   constructor(private readonly _HTTP: HttpClient) {}
   
   getMovies(page: number, genre?: string, order?: string): Observable<any> {
-    const base_url = `${this._BASE_URL}/discover/movie`;
-    const params: any = { api_key: this._KEY, page: page.toString() };
+    const params: any = {
+      api_key: this._KEY,
+      page: page.toString(),
+      with_genres: genre,
+      sort_by: order
+    };
   
-    if (genre) {
-      params.with_genres = genre;
-    }
-  
-    if (order) {
-      params.sort_by = order;
-    }
-  
-    console.log(`${base_url}?${this.buildQueryString(params)}`);
-    return this._HTTP.get(base_url, { params });
+    const url = `${this._BASE_URL}/discover/movie${this.buildQueryString(params)}`;
+    
+    console.log(url);
+    return this._HTTP.get(url);
   }
   
   private buildQueryString(params: any): string {
-    return Object.keys(params)
-      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    const queryString = Object.keys(params)
+      .map(key => params[key] ? `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}` : '')
+      .filter(Boolean)
       .join('&');
+  
+    return queryString ? `?${queryString}` : '';
   }
   
+//próxima função ************************************************************
 
   getMoviesByGender(id: string): Observable<any> {
     const url = `${this._BASE_URL}/discover/movie`; 
