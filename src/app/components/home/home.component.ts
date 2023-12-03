@@ -26,8 +26,6 @@ export class HomeComponent implements OnInit {
   searchMovie: any;
   allMovies:any[] = [];
 
-
-   
   constructor(private readonly  _SERVICE: TmdbService, private readonly route: ActivatedRoute) {}
   
   ngOnInit(): void {
@@ -103,10 +101,7 @@ export class HomeComponent implements OnInit {
         this.movies = data.results;
       }
     });
-    
-    
-   
-    
+ 
   }
   genderList() {
     this._SERVICE.getGenderList().subscribe({

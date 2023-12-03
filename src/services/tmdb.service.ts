@@ -16,8 +16,8 @@ export class TmdbService {
   private readonly _SORT = `&sort_by=` //***criar função*******************/
   private readonly _DISCOVER = `${this._BASE_URL}discover/movie${this._APPEND}` //***ajustar URL função*******************
   private readonly _ID = `${this._BASE_URL}movie`//***criar função*******************
-  private readonly _GENRES = `${this._BASE_URL}genre/movie/list`/***ajustar URL função*****************/
-  private readonly _SELECTGENRE = `&with_genres=` //***criar função*******************
+  private readonly _GENRES = `${this._BASE_URL}genre/movie/list${this._APPEND}`/***ajustar URL função*****************/
+  private readonly _SELECTGENRE = `&with_genres=${this._APPEND}` //***criar função*******************
   private readonly _SEARCH = `&with_keywords=`//***criar função*******************
   
 
@@ -66,8 +66,7 @@ export class TmdbService {
     console.log(url);
     return this._HTTP.get(url, { params });
   }
-  //próxima função ************************************************************
-
+  
   getMoviesByPages(page: number, filters?: any, sortBy: string = 'popularity.desc'): Observable<any> {
     let params = new HttpParams()
       .set('api_key', this._KEY)
@@ -86,14 +85,20 @@ export class TmdbService {
 
     return this._HTTP.get(`${this._BASE_URL}${this._ORDER}`, { params });
   }
-
+  //função lista de filmes no input********
   getGenres(): Observable<any> {
+    const params: any = {
+      api_key: this._KEY,
+      language: 'pt-BR'
+    };
+  
     const url = `${this._BASE_URL}/genre/movie/list`;
-    const params = { api_key: this._KEY };
-
-    return this._HTTP.get(url, { params }); //*** inclui url _GENRES*********************************
+    
+    console.log(url);
+    return this._HTTP.get(url, { params });
   }
   
+  //****************************************/
   getMovieDetails(movieId: string = ''): Observable<any> {
     const url = `${this._BASE_URL}${this._DETAILS}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
 
