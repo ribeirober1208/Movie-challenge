@@ -82,12 +82,12 @@ export class TopContentComponent implements OnInit {
   }
 
   handleFilterEvent(event: Event) {
-    console.log((event.target as HTMLSelectElement).value);
+    //console.log("evento", (event.target as HTMLSelectElement).value);
     this.filterEvent.emit((event.target as HTMLSelectElement).value);
   }
 
   handleOrderEvent(event: Event) {
-    console.log((event.target as HTMLSelectElement).value);
+    console.log("Order", (event.target as HTMLSelectElement).value);
     this.orderEvent.emit((event.target as HTMLSelectElement).value);
   }
 

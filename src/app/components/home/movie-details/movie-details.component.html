@@ -4,7 +4,12 @@
 
 <main class="details-container">
   <div class="imgDetails">
-    <img src="https://image.tmdb.org/t/p/w200/{{ movieDetails.poster_path }}" alt="movieDetails-poster">
+    <ng-container *ngIf="movieDetails.poster_path">
+      <img src="https://image.tmdb.org/t/p/w200/{{ movieDetails.poster_path }}" alt="movieDetails-poster">
+    </ng-container>
+    <ng-container *ngIf="!movieDetails.poster_path">
+      <img src="/assets/erro.png" alt="Image not available"style="max-width: 300px;">
+    </ng-container>
   </div>
 
   <div *ngIf="movieDetails" class="details-text">
@@ -15,6 +20,6 @@
     <div class="star-container">
       <span *ngFor="let star of getStarArray(movieDetails.vote_average)" class="star" [ngClass]="{'filled': star !== -1}">&#9733;</span>
     </div>
-    
   </div>
 </main>
+

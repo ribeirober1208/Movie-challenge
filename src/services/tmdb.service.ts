@@ -13,13 +13,12 @@ export class TmdbService {
   private readonly _ORDER = `/movie/popular`;
   private readonly _DETAILS = `/movie`;
   //alterar somente daqui para baixo, o trecho acima mantém a lista
-  private readonly _SORT = `&sort_by=` //***criar função*******************/
-  private readonly _DISCOVER = `${this._BASE_URL}discover/movie${this._APPEND}` //***ajustar URL função*******************
-  private readonly _ID = `${this._BASE_URL}movie`//***criar função*******************
-  private readonly _GENRES = `${this._BASE_URL}genre/movie/list${this._APPEND}`/***ajustar URL função*****************/
-  private readonly _SELECTGENRE = `&with_genres=${this._APPEND}` //***criar função*******************
-  private readonly _SEARCH = `&with_keywords=`//***criar função*******************
-  
+  private readonly _DISCOVER = this._BASE_URL + 'discover/movie' + this._APPEND;
+  private readonly _ID = this._BASE_URL + 'movie';
+  private readonly _GENRES = this._BASE_URL + 'genre/movie/list' + this._APPEND;
+  private readonly _SELECTGENRE = '&with_genres=' + this._APPEND;
+  private readonly _SEARCH = '&with_keywords=' + this._APPEND;
+  private readonly _SORT = '&sort_by=';
 
   constructor(private readonly _HTTP: HttpClient) {}
   
@@ -44,7 +43,7 @@ export class TmdbService {
       .filter(Boolean)
       .join('&');
   }
-  
+
   getMoviesByGender(id: string): Observable<any> {
     const params: any = {
       api_key: this._KEY,
@@ -98,7 +97,22 @@ export class TmdbService {
     return this._HTTP.get(url, { params });
   }
   
-  //****************************************/
+  getMoviesByOrder(sortBy: string): Observable<any> {
+    return this._HTTP.get(`${this._SORT}?api_key=${this._KEY}&sort_by=${sortBy}`)
+  }
+
+  getSelectedGenre(genreId: string): Observable<any> {
+    return this._HTTP.get(`${this._SELECTGENRE}&api_key=${this._KEY}&with_genres=${genreId}`)
+  }
+
+  getMoviesById(id: number): Observable<any> {
+    console.log(`${this._ID}/${id}?${this._KEY}`);
+    return this._HTTP.get(`${this._ID}/${id}?api_key=${this._KEY}`);
+  }
+
+  getMoviesBySearch(value: string): Observable<any> {
+    return this._HTTP.get(`${this._SEARCH}?api_key=${this._KEY}&search=${value}`)
+  }
   getMovieDetails(movieId: string = ''): Observable<any> {
     const url = `${this._BASE_URL}${this._DETAILS}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
 

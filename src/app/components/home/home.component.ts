@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
   orderOptions: any[] = [];   
   selectedOrder: string = 'popularity.desc'; 
   moviesByGender: string | undefined;
-  selectedGenreId?: string;;
+  selectedGenreId?: string;moviesByGenre: any;
+;
   search: string = '';
   searchMovie: any;
   allMovies:any[] = [];
@@ -65,12 +66,13 @@ export class HomeComponent implements OnInit {
   }
 
   handleFilterEvent(filterValue: string) {
-    console.log(filterValue)
+    console.log("home-evento", filterValue)
     this.selectedGenre = filterValue;
     this.applyFilters();
   }
   
   handleOrderEvent(orderValue: string) {
+    console.log("home-order", orderValue)
     this.selectedOrder = orderValue;
     this.applyFilters();
   }
@@ -82,11 +84,13 @@ export class HomeComponent implements OnInit {
   loadMovies() {
     const filters = {
       genre: this.selectedGenre,
+      order: this.selectedOrder,
       
     }
-    const genreParam = this.selectedGenreId ? this.selectedGenreId : undefined;
+    const genreParam = this.selectedGenre? this.selectedGenre : undefined;
     const orderParam = this.selectedOrder ? this.selectedOrder : undefined;
-  
+    console.log ("ordenação",orderParam);
+
     this._SERVICE.getMovies(this.currentPage, genreParam, orderParam).subscribe({
       next: (data: any) => {
         this.totalPages = data.total_pages;
@@ -103,6 +107,31 @@ export class HomeComponent implements OnInit {
     });
  
   }
+  listMoviesOrder(sortBy: any) {
+    console.log('Chamando listMoviesOrder com sortBy:', sortBy);
+  
+    sortBy = sortBy || 'popularity.desc';
+  
+    // Converte o objeto sortBy em parâmetros de URL
+    const queryParams = new URLSearchParams();
+    Object.entries(sortBy).forEach(([key, value]) => {
+      
+    });
+  
+    const queryString = queryParams.toString();
+  
+    this._SERVICE.getMoviesByOrder(queryString).subscribe({
+      next: (data: any) => {
+        console.log('Order: ', data);
+        this.orderOptions = data.results;
+      },
+      error: (error: any) => {
+        console.error('Erro na listagem de filmes ordenados:', error);
+      }
+    });
+  }
+  
+  
   genderList() {
     this._SERVICE.getGenderList().subscribe({
       next: (data: any) => {
@@ -115,7 +144,7 @@ export class HomeComponent implements OnInit {
   // Atualiza selectedGenreId com o valor do evento e chama getMoviesWhithGender.
   getSelectedGener(event:any){
     console.log(event);
-       this.selectedGenreId = event;
+       this.selectedGenre = event;
        this.getMoviesWhithGender(event);
        this.loadMovies();
   }
@@ -137,8 +166,40 @@ export class HomeComponent implements OnInit {
       this.loadMoviesWithOrder();
       this.loadMovies();
     }
-  loadMoviesWithOrder() {
-    throw new Error('Method not implemented.');
+    
+    loadMoviesWithOrder() {
+   
+      const filters = {
+        genre: this.selectedGenre,
+        order: this.selectedOrder,
+      };
+    
+      
+      const currentPageString = this.currentPage.toString();
+    
+      this._SERVICE.getMoviesByOrder(currentPageString).subscribe({
+        next: (data: any) => {
+          this.totalPages = data.total_pages;
+          this.movies = data.results;
+        },
+        error: (error: any) => {
+          console.error('Erro ao carregar filmes com a ordem selecionada:', error);
+        }
+      });
+    }
+    
+    
+    
+    
+  moviesWithGenre(genreId: string){
+    this._SERVICE.getSelectedGenre(genreId).subscribe({
+      next: (data:any)=>{
+        this.moviesByGenre = data.results;
+        console.log("Filmes filtrados por genero:", data);
+        this.totalPages = data.total_pages;
+        this.movies = data.results; 
+      }
+    })
   }
   
   //Atualiza a searchMovie com o valor do evento .
