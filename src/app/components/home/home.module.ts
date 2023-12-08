@@ -5,16 +5,13 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { MovieListComponent } from './movie-list/movie-list.component';
 import { TopContentComponent } from '../commons/top-content/top-content.component';
-
 
 @NgModule({
   declarations: [
     HomeComponent,
     MovieDetailsComponent,
     PaginationComponent,
-    MovieListComponent,
     TopContentComponent,
   ],
   imports: [
@@ -23,7 +20,8 @@ import { TopContentComponent } from '../commons/top-content/top-content.componen
   ],
 
   exports: [
-    HomeComponent
+    HomeComponent,
+
   ], 
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

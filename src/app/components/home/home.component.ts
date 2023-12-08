@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 0;
   movies: any[] = [];
+  //movies: any = {};
   navigationService: any;
   genres: any[] = []; 
   selectedGenre: string = ''; 
@@ -81,6 +82,7 @@ export class HomeComponent implements OnInit {
     // Lógica para lidar com a pesquisa
     console.log('Evento de Pesquisa:', searchValue);
   }
+  
   loadMovies() {
     const filters = {
       genre: this.selectedGenre,
@@ -88,7 +90,7 @@ export class HomeComponent implements OnInit {
       
     }
     const genreParam = this.selectedGenre? this.selectedGenre : undefined;
-    const orderParam = this.selectedOrder ? this.selectedOrder : undefined;
+    const orderParam = this.selectedOrder? this.selectedOrder : undefined;
     console.log ("ordenação",orderParam);
 
     this._SERVICE.getMovies(this.currentPage, genreParam, orderParam).subscribe({
@@ -98,13 +100,13 @@ export class HomeComponent implements OnInit {
       }
     });
   
-    this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        this.totalPages = data.total_pages;
-        this.movies = data.results;
-      }
-    });
+    // // this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
+    // //   next: (data: any) => {
+    // //     console.log(data);
+    // //     this.totalPages = data.total_pages;
+    // //     this.movies = data.results;
+    // //   }
+    // });
  
   }
   listMoviesOrder(sortBy: any) {
@@ -187,9 +189,6 @@ export class HomeComponent implements OnInit {
         }
       });
     }
-    
-    
-    
     
   moviesWithGenre(genreId: string){
     this._SERVICE.getSelectedGenre(genreId).subscribe({

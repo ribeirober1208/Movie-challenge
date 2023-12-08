@@ -63,9 +63,9 @@ export class TopContentComponent implements OnInit {
     this.filterEvent.emit(event.target.value);
   }
 
-  getSelectedOrder(event: any) {
-    this.orderEvent.emit(event.target.value);   
-  }
+  // getSelectedOrder(event: any) {
+  //   this.orderEvent.emit(event.target.value);   
+  // }
 
   getSearch(event: any) {
     this.searchEvent.emit(event.target.value);    
