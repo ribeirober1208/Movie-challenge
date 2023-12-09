@@ -97,10 +97,23 @@ export class TmdbService {
     return this._HTTP.get(url, { params });
   }
   
-  getMoviesByOrder(sortBy: string): Observable<any> {
-    return this._HTTP.get(`${this._SORT}?api_key=${this._KEY}&sort_by=${sortBy}`)
-  }
+  getMoviesByOrder(orderParams: any): Observable<any> {
+    const queryParams = new URLSearchParams();
 
+    for (const key in orderParams) {
+      if (orderParams.hasOwnProperty(key)) {
+        queryParams.set(key, orderParams[key]);
+      }
+    }
+
+    const url = `${this._SORT}?api_key=${this._KEY}&${queryParams.toString()}`;
+    return this._HTTP.get(url);
+  }
+  searchMovies(query: string): Observable<any> {
+    const url = `${this._SEARCH}?api_key=${this._KEY}&query=${query}`;
+    return this._HTTP.get(url);
+  }
+  
   getSelectedGenre(genreId: string): Observable<any> {
     return this._HTTP.get(`${this._SELECTGENRE}&api_key=${this._KEY}&with_genres=${genreId}`)
   }
