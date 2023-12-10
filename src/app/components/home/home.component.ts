@@ -168,8 +168,8 @@ export class HomeComponent implements OnInit {
       this.loadMoviesWithOrder();
       this.loadMovies();
     }
-    
-    loadMoviesWithOrder() {
+
+      loadMoviesWithOrder() {
    
       const filters = {
         genre: this.selectedGenre,
@@ -199,7 +199,6 @@ export class HomeComponent implements OnInit {
         this.movies = data.results; 
       }
     })
-  }
   
   //Atualiza a searchMovie com o valor do evento .
   getSearch(event:any){
