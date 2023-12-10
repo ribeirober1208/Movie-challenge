@@ -8,7 +8,7 @@ import { FooterComponent } from './components/commons/footer/footer.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule} from '@angular/common/http';
 import { TmdbService } from 'src/services/tmdb.service';
-import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -23,7 +23,6 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     NgxSpinnerModule,
     HttpClientModule,
-    FormsModule,
   ],
   providers: [
     TmdbService,

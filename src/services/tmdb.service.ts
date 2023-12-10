@@ -114,18 +114,18 @@ export class TmdbService {
     return this._HTTP.get(url);
   }
   
-  getSelectedGenre(genreId: string): Observable<any> {
-    return this._HTTP.get(`${this._SELECTGENRE}&api_key=${this._KEY}&with_genres=${genreId}`)
-  }
+  // getSelectedGenre(genreId: string): Observable<any> {
+  //   return this._HTTP.get(`${this._SELECTGENRE}&api_key=${this._KEY}&with_genres=${genreId}`)
+  // }
 
-  getMoviesById(id: number): Observable<any> {
-    console.log(`${this._ID}/${id}?${this._KEY}`);
-    return this._HTTP.get(`${this._ID}/${id}?api_key=${this._KEY}`);
-  }
+  // getMoviesById(id: number): Observable<any> {
+  //   console.log(`${this._ID}/${id}?${this._KEY}`);
+  //   return this._HTTP.get(`${this._ID}/${id}?api_key=${this._KEY}`);
+  // }
 
-  getMoviesBySearch(value: string): Observable<any> {
-    return this._HTTP.get(`${this._SEARCH}?api_key=${this._KEY}&search=${value}`)
-  }
+  // getMoviesBySearch(value: string): Observable<any> {
+  //   return this._HTTP.get(`${this._SEARCH}?api_key=${this._KEY}&search=${value}`)
+  // }
   getMovieDetails(movieId: string = ''): Observable<any> {
     const url = `${this._BASE_URL}${this._DETAILS}/${movieId}?api_key=${this._KEY}&language=pt-BR`;
 
