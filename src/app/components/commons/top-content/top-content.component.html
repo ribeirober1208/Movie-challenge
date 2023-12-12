@@ -8,18 +8,18 @@
     </select>
     <select id="order" (change)="handleOrderEvent($event)">
       <option value="">Ordenar por</option>
-      <option *ngFor="let option of orderOptions" [value]="option">{{ option.name }}</option>
+      <option *ngFor="let option of orderOptions" [value]="option.order">{{ option.name }}</option>
     </select>     
   </div>
-  <div id="search-container">
+  <!-- <div id="search-container">
     <section id="search">
       <form class="d-flex">
-        <input class="form-control" type="search" placeholder="Pesquisa">
+        <input class="form-control" type="search" [placeholder]="items[0].placeholder">
         <button class="btn btn-outline-success" type="submit">
           <img src="assets/Search.png" alt="Buscar">
         </button>
       </form>
-      
     </section>
-  </div>
+  </div> -->
+  
 </section>

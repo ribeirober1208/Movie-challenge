@@ -12,7 +12,6 @@ export class TmdbService {
   private readonly _APPEND = `?include_adult=false&api_key=${this._KEY}&page=`
   private readonly _ORDER = `/movie/popular`;
   private readonly _DETAILS = `/movie`;
-  //alterar somente daqui para baixo, o trecho acima mantém a lista
   private readonly _DISCOVER = this._BASE_URL + 'discover/movie' + this._APPEND;
   private readonly _ID = this._BASE_URL + 'movie';
   private readonly _GENRES = this._BASE_URL + 'genre/movie/list' + this._APPEND;

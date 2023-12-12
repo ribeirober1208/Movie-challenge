@@ -17,6 +17,7 @@ export class TopContentComponent implements OnInit {
   @Output() searchEvent = new EventEmitter<string>();
   @Output() searchButtonClick: EventEmitter<void> = new EventEmitter<void>();
 
+  @Input() items: any[] = [{ placeholder: 'Pesquisa'},];
   @Input() genres: any[] = []; 
   @Input() selectedGenre: string = '';
   @Input() selectedOrder: string = ''; 
@@ -53,7 +54,11 @@ export class TopContentComponent implements OnInit {
       order: "vote_count.asc", 
       name: "Menos votados",
     }
+
+    
   ];
+
+ 
   
   constructor() {}
 
@@ -62,10 +67,6 @@ export class TopContentComponent implements OnInit {
   getSelectedGener(event: any) {
     this.filterEvent.emit(event.target.value);
   }
-
-  // getSelectedOrder(event: any) {
-  //   this.orderEvent.emit(event.target.value);   
-  // }
 
   getSearch(event: any) {
     this.searchEvent.emit(event.target.value);    

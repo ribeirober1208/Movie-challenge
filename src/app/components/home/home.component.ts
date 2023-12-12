@@ -7,7 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [TmdbService],
 })
 
 export class HomeComponent implements OnInit {
@@ -16,20 +17,21 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   movies: any[] = [];
   //movies: any = {};
-  navigationService: any;
   genres: any[] = []; 
   selectedGenre: string = ''; 
   orderOptions: any[] = [];   
   selectedOrder: string = 'popularity.desc'; 
   moviesByGender: string | undefined;
   selectedGenreId?: string;moviesByGenre: any;
-;
   search: string = '';
   searchMovie: any;
   allMovies:any[] = [];
+  filterEvent: any;
+  searchEvent: any;
+
 
   constructor(private readonly  _SERVICE: TmdbService, private readonly route: ActivatedRoute) {}
-  
+
   ngOnInit(): void {
     const queryParams = this.route.snapshot.queryParamMap;
     if (
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
       
     this.loadGenres(); // Carregar gêneros no início
     this.applyFilters(); // Aplicar filtros iniciais
+    this.listMoviesOrder('popularity.desc');
   }
   }
 
@@ -70,12 +73,14 @@ export class HomeComponent implements OnInit {
     console.log("home-evento", filterValue)
     this.selectedGenre = filterValue;
     this.applyFilters();
+    //this.listMoviesOrder('popularity.desc');
   }
   
   handleOrderEvent(orderValue: string) {
     console.log("home-order", orderValue)
     this.selectedOrder = orderValue;
     this.applyFilters();
+    this.listMoviesOrder(orderValue);
   }
   
   handleSearchEvent(searchValue: string) {
@@ -100,14 +105,6 @@ export class HomeComponent implements OnInit {
       }
     });
   
-    // // this._SERVICE.getMoviesByPages(this.currentPage, filters, this.selectedOrder).subscribe({
-    // //   next: (data: any) => {
-    // //     console.log(data);
-    // //     this.totalPages = data.total_pages;
-    // //     this.movies = data.results;
-    // //   }
-    // });
- 
   }
   listMoviesOrder(sortBy: any) {
     console.log('Chamando listMoviesOrder com sortBy:', sortBy);
@@ -126,6 +123,7 @@ export class HomeComponent implements OnInit {
       next: (data: any) => {
         console.log('Order: ', data);
         this.orderOptions = data.results;
+        this.loadMovies();
       },
       error: (error: any) => {
         console.error('Erro na listagem de filmes ordenados:', error);
@@ -199,19 +197,16 @@ export class HomeComponent implements OnInit {
         this.movies = data.results; 
       }
     })
+
+    this.filterEvent.subscribe((filterValue: string) => {
+      // Lógica para lidar com a mudança no filtro
+      console.log('Filtro alterado:', filterValue);
+    });
+
+    this.searchEvent.subscribe((searchValue: string) => {
+      // Lógica para lidar com a mudança na pesquisa
+      console.log('Pesquisa alterada:', searchValue);
+    });
   
-  //Atualiza a searchMovie com o valor do evento .
-  getSearch(event:any){
-    this.searchMovie = event; 
-  }
-  
-  //Verifica se o o value buscado está presente na lista de filmes
-  searchMoviesList() {
-    this._SERVICE.getMovies(this.currentPage).subscribe((data) => {
-      this.allMovies = data.results;
-      const value = this.searchMovie.toLowerCase();
-      this.movies = this.allMovies.filter((movie) => {
-      return movie.title.toLowerCase().includes(value);
-      });
-    }); 
   }}
+
