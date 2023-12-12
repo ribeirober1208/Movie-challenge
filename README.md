@@ -17,12 +17,18 @@ Como desenvolvedora Front-end, esses projeto foi desafiador e enriquecedor em ap
 
 ## 2. Protótipo em baixa
 
+#### 2.1 Lista de filmes:
 <img src="src/assets/movie-list.png" alt="Alta" style="display:inline-block; margin-right: 20px;">
+
+#### 2.2 Detalhes do filme:
 <img src="src/assets/movie-detail.png" alt="Alta" style="display:inline-block;">
 
 ## 3. Protótipo em alta
 
+#### 3.1 Lista de filmes:
 <img src="src/assets/movie-alta.png" alt="Alta" style="display:inline-block; margin-right: 20px;">
+
+#### 3.2 Detalhes do filme:
 <img src="src/assets/details.png" alt="Alta" style="display:inline-block;">
 
 
