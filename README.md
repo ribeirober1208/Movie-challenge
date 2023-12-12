@@ -17,11 +17,13 @@ Como desenvolvedora Front-end, esses projeto foi desafiador e enriquecedor em ap
 
 ## 2. Protótipo em baixa
 
-![Alta](src/assets/movie-list.png)
+<img src="src/assets/movie-list.png" alt="Alta" style="display:inline-block; margin-right: 20px;">
+<img src="src/assets/movie-detail.png" alt="Alta" style="display:inline-block;">
 
 ## 3. Protótipo em alta
 
-![Alta](src/assets/movie-alta.png)
+<img src="src/assets/movie-alta.png" alt="Alta" style="display:inline-block; margin-right: 20px;">
+<img src="src/assets/details.png" alt="Alta" style="display:inline-block;">
 
 
 ## 4. Histórias de usuários
