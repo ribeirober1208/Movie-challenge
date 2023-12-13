@@ -99,11 +99,11 @@ e a ordenação.
 
 ## 6. Checklist de Objetivos Alcançados
 
-  ✅ Tenha protótipo de alta fidelidade no Figma
-  ✅ Atende a todos os critérios mínimos de aceitação
-  ✅ Está hospedado no GitHub
-  ✅ Está com o deploy realizado
-  ✅ Possui um README com a definição do produto
+ - ✅ Tenha protótipo de alta fidelidade no Figma
+ - ✅ Atende a todos os critérios mínimos de aceitação
+ - ✅ Está hospedado no GitHub
+ - ✅ Está com o deploy realizado
+ - ✅ Possui um README com a definição do produto
 
 ## 7. Tecnologias
 
