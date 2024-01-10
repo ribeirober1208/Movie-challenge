@@ -95,7 +95,8 @@ e a ordenação.
 
 ## 5. Teste
  
- Em codificação
+ Cobertura de 80%
+ <img src="src/assets/teste.png" alt="Teste" style="display:inline-block;">
 
 ## 6. Checklist de Objetivos Alcançados
 
