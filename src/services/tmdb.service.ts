@@ -20,7 +20,8 @@ export class TmdbService {
   private readonly _SORT = '&sort_by=';
 
   constructor(private readonly _HTTP: HttpClient) {}
-  
+  //protocolo de como se faz essa organização. URL orgnizador universal de recursos. 
+  //é uma forma de organizar a comunicação entre sistemas de internet
   getMovies(page: number, genre?: string, order?: string): Observable<any> {
     const params: any = {
       api_key: this._KEY,
