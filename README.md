@@ -11,7 +11,7 @@
 * [8. Desenvolvido por](#8-desenvolvido)
 ## 1. Prefácio
 
-Movie Challenge é uma projeto que usa o framewoek Angular com linguagem Tyscript e HTML. Criei uma página da web destinada a visualizar, filtrar e ordenar o catálogo de filmes da The Movie Database API V3. Esta página pode servir como um catálogo de filmes geral, mas também, se você quiser, pode considerar a possibilidade de projetá-la para um público específico com preferências como "filmes western" ou "filmes dos anos 80", por exemplo.
+Movie Challenge é uma projeto que usa o framework Angular com linguagem Tyscript e HTML. Criei uma página da web destinada a visualizar, filtrar e ordenar o catálogo de filmes da The Movie Database API V3. Esta página pode servir como um catálogo de filmes geral, mas também, se você quiser, pode considerar a possibilidade de projetá-la para um público específico com preferências como "filmes western" ou "filmes dos anos 80", por exemplo.
 
 Como desenvolvedora Front-end, esses projeto foi desafiador e enriquecedor em aprendizado.
 
